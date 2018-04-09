@@ -2,7 +2,8 @@
 # variable "aws_secret_key" {}
 
 provider "aws" {
-  region = "ap-southeast-2"
+  region = "ap-northeast-2"
+  # region = "us-east-2"
   # profile = "reactiveops"
   # access_key = "${var.aws_access_key}"
   # secret_key = "${var.aws_secret_key}"
@@ -10,7 +11,8 @@ provider "aws" {
 
 # TODO: use a data resource
 variable ami {
-  default = "ami-2b12dc49"
+  default = "ami-633d920d" # ap-northeast-2
+  # default = "ami-e82a1a8d" # us-east-2
 }
 
 # output .key_name
@@ -62,7 +64,7 @@ resource "aws_security_group_rule" "web_ssh" {
 resource "aws_security_group_rule" "web_egress" {
   type              = "egress"
   from_port         = 0
-  to_port           = 0
+  to_port           = 65535
   protocol          = "-1"
   security_group_id = "${aws_security_group.web.id}"
   cidr_blocks       = ["0.0.0.0/0"]
